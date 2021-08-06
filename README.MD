@@ -17,7 +17,7 @@ kubectl apply -f namespace.yaml
 ### MYSQL数据库
 
 - 修改secret.yaml文件，保存数据库密码
-```
+```cd 
 eg. echo -n "123456"| base64
 ----------------------------------
 kubectl apply -f secret.yaml 
@@ -30,6 +30,7 @@ kubectl apply -f mysql.yaml
 
 ~~*以后考虑使用initcontainers来初始化，减少手工操作(需要判断是否已经初始化)*~~
 
+kubectl get pods -n azkaban
 - 数据库数据初始化
 ```
 kubectl exec azkaban-mysql-xxxxx-xxxx -n azkaban -it -- mysql -uroot -pmypassword azkaban < create-all-sql-3.84.4.sql

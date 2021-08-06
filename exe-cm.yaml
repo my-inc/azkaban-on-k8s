@@ -8,8 +8,8 @@ metadata:
     deloy: exe
 data:
     azkaban-exe.properties: |-
-      azkaban.name=Your name
-      azkaban.label=My Local Azkaban
+      azkaban.name=ScheduleSystem
+      azkaban.label=ScheduleSystem
       azkaban.color=#FF3601
       azkaban.default.servlet.path=/index
       web.resource.dir=web/
@@ -32,10 +32,10 @@ data:
       executor.connector.stats=true
       database.type=mysql
       mysql.port=3306
-      mysql.host=MYSQL_HOST
-      mysql.database=MYSQL_DB
-      mysql.user=MYSQL_USER_NAME
-      mysql.password=MYSQL_USER_PASSWORD
+      mysql.host=rm-8vb0y96rf7m3fai4m.mysql.zhangbei.rds.aliyuncs.com
+      mysql.database=azkaban
+      mysql.user=suyongjie
+      mysql.password=Mykj@123456
       mysql.numconnections=100
       executor.port=12321
       executor.maxThreads=50

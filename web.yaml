@@ -2,43 +2,68 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  finalizers:
+    - kubernetes.io/pv-protection
+  labels:
+    alicloud-pvname: azkaban-web-log-pv
   name: azkaban-web-log-pv
   namespace: azkaban
-  labels:
-    app: azkaban
-    deploy: web
-    volume: log
+  uid: 6878121c-8437-4362-9bbc-d9c46fe0ba10
 spec:
-  storageClassName: manual
-  capacity:
-    storage: 300Mi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: /data/pv/azkaban/web/log
+  capacity:
+    storage: 20Gi
+  csi:
+    driver: nasplugin.csi.alibabacloud.com
+    volumeAttributes:
+      path: /data/nas/azkaban/logs
+      server: 9d5504b2b7-ysj46.cn-zhangjiakou.nas.aliyuncs.com
+      vers: '3'
+    volumeHandle: azkaban-web-log-pv
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nas
+  volumeMode: Filesystem
+status:
+  phase: Available
 ---
 # azkaban-azkaban-data-pvc
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
-  name: azkaban-web-log-pvc
-  namespace: azkaban
+  annotations:
+    pv.kubernetes.io/bound-by-controller: 'yes'
+  finalizers:
+    - kubernetes.io/pv-protection
   labels:
-    app: azkaban
-    deploy: web
-    volume: log
+    alicloud-pvname: azkaban-pvc-azkaban-web-log-pvc
+  name: azkaban-pvc-azkaban-web-log-pvc
+  namespace: azkaban
+  uid: 59b02b83-adbf-496f-99ae-be5f6efddc0f
 spec:
-  selector:
-    matchLabels:
-      app: azkaban
-      deploy: web
-      volume: log
   accessModes:
     - ReadWriteOnce
-  storageClassName: manual
-  resources:
-    requests:
-      storage: 300Mi
+  capacity:
+    storage: 20Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: azkaban-web-log-pvc
+    namespace: azkaban
+    resourceVersion: '291062276'
+    uid: df18f8cf-1530-465a-ba63-44415b934e0c
+  csi:
+    driver: nasplugin.csi.alibabacloud.com
+    volumeAttributes:
+      path: /data/nas/azkaban/logs
+      server: 9d5504b2b7-ysj46.cn-zhangjiakou.nas.aliyuncs.com
+      vers: '3'
+    volumeHandle: azkaban-pvc-azkaban-web-log-pvc
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nas
+  volumeMode: Filesystem
+status:
+  phase: Bound
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -64,40 +89,42 @@ spec:
     spec:
       containers:
         - name: azkaban
-          image: localhost:32000/azkaban:t3
+          image: registry.cn-zhangjiakou.aliyuncs.com/myt-images/azkaban-python3:v3.84.4
           args: ["web"]
           env:
             - name: MYSQL_HOST
-              value: azkaban-mysql
+              value: rm-8vb0y96rf7m3fai4m.mysql.zhangbei.rds.aliyuncs.com
             - name: MYSQL_DB
               value: azkaban
             - name: MYSQL_USER_NAME
-              value: azkaban
+              value: suyongjie
             - name: MYSQL_USER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-pass
-                  key: user-password
+              value: Mykj@123456
           ports:
             - containerPort: 8081
               protocol: TCP
           volumeMounts:
             - name: config
-              mountPath: /opt/azkaban/conf/
+              mountPath: /opt/azkaban/azkaban-web/conf/azkaban.properties
+              subPath: azkaban.properties
+            - name: azkaban-azkaban-log
+              mountPath: /opt/azkaban/azkaban-web/conf/log4j.properties
+              subPath: log4j.properties
             - name: user-config
               # 如果使用subpath，将不能接受configmap的更新，所以用户文件增加一层文件夹
               # 实践证明无效，热更该文件,azkaban也不接受新的信息
-              mountPath: /opt/azkaban/azkaban-web/conf/users/
-            - name: azkaban-azkaban-log
-              mountPath: /opt/azkaban/azkaban-web/log
-
+              mountPath: /opt/azkaban/azkaban-web/conf/azkaban-users.xml
+              subPath: azkaban-users.xml
+            - name: tz
+              mountPath: /etc/localtime
+              subPath: Shanghai
       volumes:
         - name: config
           configMap:
             name: azkaban-web-config
             items:
               - key: azkaban-web.properties
-                path: azkaban-web.properties
+                path: azkaban.properties
         - name: user-config
           configMap:
             name: azkaban-web-config
@@ -105,20 +132,29 @@ spec:
               - key: azkaban-users.xml
                 path: azkaban-users.xml
         - name: azkaban-azkaban-log
-          persistentVolumeClaim:
-            claimName: azkaban-web-log-pvc
+          configMap:
+            name: azkaban-web-config
+            items:
+              - key: azkaban-log4j.properties
+                path: log4j.properties
+        - name: tz
+          configMap:
+            name: tz
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  #annotations:
+    #service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "intranet"
   name: azkaban-web
   namespace: azkaban
 spec:
   selector:
    app: azkaban
    deploy: web
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 8081
     targetPort: 8081
+    protocol: TCP
     nodePort: 31081

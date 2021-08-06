@@ -7,50 +7,63 @@ metadata:
     app: azkaban
     deloy: web
 data:
-    azkaban-users.xml: |-
-      <azkaban-users>
-        <user groups="azkaban" password="azkaban" roles="admin" username="azkaban"/>
-        <user username="admin" password="admin" groups="azkaban" roles="admin"/>
-        <user username="admin1" password="admin1" groups="azkaban" roles="admin"/>
-        <user password="metrics" roles="metrics" username="metrics"/>
-        <role name="admin" permissions="ADMIN"/>
-        <role name="metrics" permissions="METRICS"/>
-      </azkaban-users>
+  azkaban-users.xml: |-
+    <azkaban-users>
+      <user groups="azkaban" password="Mykj@123456" roles="admin" username="suyongjie"/>
+      <user groups="azkaban" password="Mykj@123456" roles="admin" username="azkaban"/>
+      <user groups="azkaban" password="scheduler" roles="admin" username="scheduler"/>
+      <user password="metrics" roles="metrics" username="metrics"/>
+      <role name="admin" permissions="ADMIN"/>
+      <role name="metrics" permissions="METRICS"/>
+    </azkaban-users>
+
+  azkaban-log4j.properties: |-
+    log4j.rootLogger=INFO, Console
+    log4j.logger.azkaban=INFO, server
+    log4j.appender.server=org.apache.log4j.RollingFileAppender
+    log4j.appender.server.layout=org.apache.log4j.PatternLayout
+    log4j.appender.server.File=logs/azkaban-webserver.log
+    log4j.appender.server.layout.ConversionPattern=%d{yyyy/MM/dd HH:mm:ss.SSS Z} %p [%c{1}] [Azkaban] %m%n
+    log4j.appender.server.MaxFileSize=102400MB
+    log4j.appender.server.MaxBackupIndex=2
+    log4j.appender.Console=org.apache.log4j.ConsoleAppender
+    log4j.appender.Console.layout=org.apache.log4j.PatternLayout
+    log4j.appender.Console.layout.ConversionPattern=%d{yyyy/MM/dd HH:mm:ss.SSS Z} %p [%c{1}] [Azkaban] %m%n
 
 
-    azkaban-web.properties: |-
-      azkaban.name=Your name
-      azkaban.label=My Local Azkaban
-      azkaban.color=#FF3601
-      azkaban.default.servlet.path=/index
-      web.resource.dir=web/
-      default.timezone.id=Asia/Shanghai
-      user.manager.class=azkaban.user.XmlUserManager
-      user.manager.xml.file=conf/users/azkaban-users.xml
-      executor.global.properties=conf/global.properties
-      azkaban.project.dir=projects
-      velocity.dev.mode=false
-      jetty.use.ssl=false
-      jetty.maxThreads=25
-      jetty.port=8081
-      mail.sender=
-      mail.host=
-      job.failure.email=
-      job.success.email=
-      lockdown.create.projects=false
-      cache.directory=cache
-      jetty.connector.stats=true
-      executor.connector.stats=true
-      database.type=mysql
-      mysql.port=3306
-      mysql.host=MYSQL_HOST
-      mysql.database=MYSQL_DB
-      mysql.user=MYSQL_USER_NAME
-      mysql.password=MYSQL_USER_PASSWORD
-      mysql.numconnections=100
-      azkaban.use.multiple.executors=true
-      azkaban.executorselector.filters=StaticRemainingFlowSize,CpuStatus
-      azkaban.executorselector.comparator.NumberOfAssignedFlowComparator=1
-      azkaban.executorselector.comparator.Memory=1
-      azkaban.executorselector.comparator.LastDispatched=1
-      azkaban.executorselector.comparator.CpuUsage=1
+  azkaban-web.properties: |-
+    azkaban.name=ScheduleSystem
+    azkaban.label=ScheduleSystem
+    azkaban.color=#FF3601
+    azkaban.default.servlet.path=/index
+    web.resource.dir=web/
+    default.timezone.id=Asia/Shanghai
+    user.manager.class=azkaban.user.XmlUserManager
+    user.manager.xml.file=conf/users/azkaban-users.xml
+    executor.global.properties=conf/global.properties
+    azkaban.project.dir=projects
+    velocity.dev.mode=false
+    jetty.use.ssl=false
+    jetty.maxThreads=25
+    jetty.port=8081
+    mail.sender=
+    mail.host=
+    job.failure.email=
+    job.success.email=
+    lockdown.create.projects=false
+    cache.directory=cache
+    jetty.connector.stats=true
+    executor.connector.stats=true
+    database.type=mysql
+    mysql.port=3306
+    mysql.host=rm-8vb0y96rf7m3fai4m.mysql.zhangbei.rds.aliyuncs.com
+    mysql.database=azkaban
+    mysql.user=suyongjie
+    mysql.password=Mykj@123456
+    mysql.numconnections=100
+    azkaban.use.multiple.executors=true
+    azkaban.executorselector.filters=StaticRemainingFlowSize,CpuStatus
+    azkaban.executorselector.comparator.NumberOfAssignedFlowComparator=1
+    azkaban.executorselector.comparator.Memory=1
+    azkaban.executorselector.comparator.LastDispatched=1
+    azkaban.executorselector.comparator.CpuUsage=1

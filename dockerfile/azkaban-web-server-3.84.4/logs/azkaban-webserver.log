@@ -1,0 +1,114 @@
+2021/07/30 15:13:05.340 +0800 INFO [AzkabanWebServer] [Azkaban] Starting Jetty Azkaban Web Server...
+2021/07/30 15:13:05.364 +0800 INFO [AzkabanServer] [Azkaban] Loading azkaban settings file from bin/internal/../../conf
+2021/07/30 15:13:05.364 +0800 INFO [AzkabanServer] [Azkaban] Loading azkaban properties file
+2021/07/30 15:13:06.341 +0800 INFO [WebServerProvider] [Azkaban] Setting up connector with stats on: true
+2021/07/30 15:13:06.346 +0800 INFO [WebServerProvider] [Azkaban] Starting server on port: 8081 # Max threads: 25
+2021/07/30 15:13:06.435 +0800 INFO [JdbcProjectImpl] [Azkaban] project temporary folder is being constructed.
+2021/07/30 15:13:06.435 +0800 WARN [StorageCleaner] [Azkaban] Project cleanup disabled. All artifacts will be stored.
+2021/07/30 15:13:06.436 +0800 INFO [ValidatorUtils] [Azkaban] Creating XmlValidatorManager instance (loading validators)...
+2021/07/30 15:13:06.437 +0800 WARN [XmlValidatorManager] [Azkaban] Validator directory validators does not exist or is not a directory.
+2021/07/30 15:13:06.453 +0800 WARN [XmlValidatorManager] [Azkaban] Azkaban properties file does not contain the key project.validators.xml.file
+2021/07/30 15:13:06.453 +0800 INFO [ValidatorUtils] [Azkaban] XmlValidatorManager instance created.
+2021/07/30 15:13:06.454 +0800 INFO [AzkabanProjectLoader] [Azkaban] Using temp dir: /home/suyongjie/azkaban-on-k8s/dockerfile/azkaban-web-server-3.84.4/temp
+2021/07/30 15:13:06.454 +0800 INFO [AzkabanProjectLoader] [Azkaban] Project version retention is set to 3
+2021/07/30 15:13:06.454 +0800 INFO [ProjectManager] [Azkaban] Loading active projects.
+2021/07/30 15:13:06.873 +0800 INFO [ProjectManager] [Azkaban] Loading flows from active projects.
+2021/07/30 15:13:06.880 +0800 INFO [ProjectManager] [Azkaban] Loading whitelisted projects.
+2021/07/30 15:13:06.880 +0800 INFO [ProjectManager] [Azkaban] ProjectManager instance created.
+2021/07/30 15:13:06.940 +0800 INFO [TriggerManager] [Azkaban] TriggerManager loaded.
+2021/07/30 15:13:06.940 +0800 WARN [SessionCache] [Azkaban] azkaban.session.max_number_per_ip_per_user is not configured. The number of sessions per IP per user is not being capped.
+2021/07/30 15:13:06.946 +0800 INFO [AzkabanWebServerModule] [Azkaban] Loading user manager class azkaban.user.XmlUserManager
+2021/07/30 15:13:07.022 +0800 INFO [XmlUserManager] [Azkaban] Loading user suyongjie
+2021/07/30 15:13:07.022 +0800 INFO [XmlUserManager] [Azkaban] Loading user metrics
+2021/07/30 15:13:07.031 +0800 INFO [UserUtils] [Azkaban] Starting configuration watching thread.
+2021/07/30 15:13:07.080 +0800 INFO [AzkabanWebServer] [Azkaban] Loading built-in checker and action types
+2021/07/30 15:13:07.082 +0800 INFO [CheckerTypeLoader] [Azkaban] Registering checker BasicTimeChecker
+2021/07/30 15:13:07.083 +0800 INFO [CheckerTypeLoader] [Azkaban] Registering checker SlaChecker
+2021/07/30 15:13:07.083 +0800 INFO [CheckerTypeLoader] [Azkaban] Registering checker ExecutionChecker
+2021/07/30 15:13:07.083 +0800 INFO [ActionTypeLoader] [Azkaban] Registering action ExecuteFlowAction
+2021/07/30 15:13:07.083 +0800 INFO [ActionTypeLoader] [Azkaban] Registering action KillExecutionAction
+2021/07/30 15:13:07.084 +0800 INFO [ActionTypeLoader] [Azkaban] Registering action AlertAction
+2021/07/30 15:13:07.084 +0800 INFO [ActionTypeLoader] [Azkaban] Registering action CreateTriggerAction
+2021/07/30 15:13:07.085 +0800 INFO [PluginCheckerAndActionsLoader] [Azkaban] Loading plug-in checker and action types
+2021/07/30 15:13:07.085 +0800 ERROR [PluginCheckerAndActionsLoader] [Azkaban] plugin path plugins/triggers doesn't exist!
+2021/07/30 15:13:07.113 +0800 INFO [AzkabanWebServer] [Azkaban] Setting timezone to Asia/Shanghai
+2021/07/30 15:13:07.113 +0800 INFO [AzkabanWebServer] [Azkaban] Registering MBeans...
+2021/07/30 15:13:07.137 +0800 INFO [MBeanRegistrationManager] [Azkaban] Bean azkaban.jmx.JmxJettyServer registered.
+2021/07/30 15:13:07.138 +0800 INFO [MBeanRegistrationManager] [Azkaban] Bean azkaban.jmx.JmxTriggerManager registered.
+2021/07/30 15:13:07.141 +0800 INFO [MBeanRegistrationManager] [Azkaban] Bean azkaban.jmx.JmxExecutorManager registered.
+2021/07/30 15:13:07.158 +0800 INFO [MBeanRegistrationManager] [Azkaban] Bean org.apache.log4j.jmx.HierarchyDynamicMBean registered.
+2021/07/30 15:13:07.158 +0800 INFO [AzkabanWebServer] [Azkaban] ************* loginLoggerObjName is null, make sure there is a logger with name azkaban.webapp.servlet.LoginAbstractAzkabanServlet
+2021/07/30 15:13:07.161 +0800 INFO [ExecutorManager] [Azkaban] Initializing executors from database.
+2021/07/30 15:13:07.164 +0800 ERROR [ExecutorManager] [Azkaban] No active executors found
+2021/07/30 15:13:07.165 +0800 ERROR [StdOutErrRedirect] [Azkaban] Exception in thread "main" 
+2021/07/30 15:13:07.165 +0800 ERROR [StdOutErrRedirect] [Azkaban] azkaban.executor.ExecutorManagerException: No active executors found
+2021/07/30 15:13:07.165 +0800 ERROR [StdOutErrRedirect] [Azkaban] 	at azkaban.executor.ActiveExecutors.setupExecutors(ActiveExecutors.java:52)
+2021/07/30 15:13:07.165 +0800 ERROR [StdOutErrRedirect] [Azkaban] 	at azkaban.executor.ExecutorManager.setupExecutors(ExecutorManager.java:192)
+2021/07/30 15:13:07.165 +0800 ERROR [StdOutErrRedirect] [Azkaban] 	at azkaban.executor.ExecutorManager.initialize(ExecutorManager.java:127)
+2021/07/30 15:13:07.165 +0800 ERROR [StdOutErrRedirect] [Azkaban] 	at azkaban.executor.ExecutorManager.start(ExecutorManager.java:141)
+2021/07/30 15:13:07.165 +0800 ERROR [StdOutErrRedirect] [Azkaban] 	at azkaban.webapp.AzkabanWebServer.launch(AzkabanWebServer.java:234)
+2021/07/30 15:13:07.166 +0800 ERROR [StdOutErrRedirect] [Azkaban] 	at azkaban.webapp.AzkabanWebServer.main(AzkabanWebServer.java:227)
+2021/07/30 15:15:35.459 +0800 INFO [AzkabanWebServer] [Azkaban] Starting Jetty Azkaban Web Server...
+2021/07/30 15:15:35.498 +0800 INFO [AzkabanServer] [Azkaban] Loading azkaban settings file from bin/internal/../../conf
+2021/07/30 15:15:35.500 +0800 INFO [AzkabanServer] [Azkaban] Loading azkaban properties file
+2021/07/30 15:15:36.453 +0800 INFO [WebServerProvider] [Azkaban] Setting up connector with stats on: true
+2021/07/30 15:15:36.455 +0800 INFO [WebServerProvider] [Azkaban] Starting server on port: 8081 # Max threads: 25
+2021/07/30 15:15:36.533 +0800 WARN [StorageCleaner] [Azkaban] Project cleanup disabled. All artifacts will be stored.
+2021/07/30 15:15:36.533 +0800 INFO [ValidatorUtils] [Azkaban] Creating XmlValidatorManager instance (loading validators)...
+2021/07/30 15:15:36.535 +0800 WARN [XmlValidatorManager] [Azkaban] Validator directory validators does not exist or is not a directory.
+2021/07/30 15:15:36.538 +0800 WARN [XmlValidatorManager] [Azkaban] Azkaban properties file does not contain the key project.validators.xml.file
+2021/07/30 15:15:36.538 +0800 INFO [ValidatorUtils] [Azkaban] XmlValidatorManager instance created.
+2021/07/30 15:15:36.539 +0800 INFO [AzkabanProjectLoader] [Azkaban] Using temp dir: /home/suyongjie/azkaban-on-k8s/dockerfile/azkaban-web-server-3.84.4/temp
+2021/07/30 15:15:36.539 +0800 INFO [AzkabanProjectLoader] [Azkaban] Project version retention is set to 3
+2021/07/30 15:15:36.540 +0800 INFO [ProjectManager] [Azkaban] Loading active projects.
+2021/07/30 15:15:36.962 +0800 INFO [ProjectManager] [Azkaban] Loading flows from active projects.
+2021/07/30 15:15:36.971 +0800 INFO [ProjectManager] [Azkaban] Loading whitelisted projects.
+2021/07/30 15:15:36.971 +0800 INFO [ProjectManager] [Azkaban] ProjectManager instance created.
+2021/07/30 15:15:37.039 +0800 INFO [TriggerManager] [Azkaban] TriggerManager loaded.
+2021/07/30 15:15:37.041 +0800 WARN [SessionCache] [Azkaban] azkaban.session.max_number_per_ip_per_user is not configured. The number of sessions per IP per user is not being capped.
+2021/07/30 15:15:37.046 +0800 INFO [AzkabanWebServerModule] [Azkaban] Loading user manager class azkaban.user.XmlUserManager
+2021/07/30 15:15:37.085 +0800 INFO [XmlUserManager] [Azkaban] Loading user suyongjie
+2021/07/30 15:15:37.086 +0800 INFO [XmlUserManager] [Azkaban] Loading user metrics
+2021/07/30 15:15:37.098 +0800 INFO [UserUtils] [Azkaban] Starting configuration watching thread.
+2021/07/30 15:15:37.154 +0800 INFO [AzkabanWebServer] [Azkaban] Loading built-in checker and action types
+2021/07/30 15:15:37.157 +0800 INFO [CheckerTypeLoader] [Azkaban] Registering checker BasicTimeChecker
+2021/07/30 15:15:37.158 +0800 INFO [CheckerTypeLoader] [Azkaban] Registering checker SlaChecker
+2021/07/30 15:15:37.162 +0800 INFO [CheckerTypeLoader] [Azkaban] Registering checker ExecutionChecker
+2021/07/30 15:15:37.162 +0800 INFO [ActionTypeLoader] [Azkaban] Registering action ExecuteFlowAction
+2021/07/30 15:15:37.163 +0800 INFO [ActionTypeLoader] [Azkaban] Registering action KillExecutionAction
+2021/07/30 15:15:37.163 +0800 INFO [ActionTypeLoader] [Azkaban] Registering action AlertAction
+2021/07/30 15:15:37.163 +0800 INFO [ActionTypeLoader] [Azkaban] Registering action CreateTriggerAction
+2021/07/30 15:15:37.164 +0800 INFO [PluginCheckerAndActionsLoader] [Azkaban] Loading plug-in checker and action types
+2021/07/30 15:15:37.164 +0800 ERROR [PluginCheckerAndActionsLoader] [Azkaban] plugin path plugins/triggers doesn't exist!
+2021/07/30 15:15:37.196 +0800 INFO [AzkabanWebServer] [Azkaban] Setting timezone to Asia/Shanghai
+2021/07/30 15:15:37.196 +0800 INFO [AzkabanWebServer] [Azkaban] Registering MBeans...
+2021/07/30 15:15:37.218 +0800 INFO [MBeanRegistrationManager] [Azkaban] Bean azkaban.jmx.JmxJettyServer registered.
+2021/07/30 15:15:37.220 +0800 INFO [MBeanRegistrationManager] [Azkaban] Bean azkaban.jmx.JmxTriggerManager registered.
+2021/07/30 15:15:37.222 +0800 INFO [MBeanRegistrationManager] [Azkaban] Bean azkaban.jmx.JmxExecutorManager registered.
+2021/07/30 15:15:37.257 +0800 INFO [MBeanRegistrationManager] [Azkaban] Bean org.apache.log4j.jmx.HierarchyDynamicMBean registered.
+2021/07/30 15:15:37.258 +0800 INFO [AzkabanWebServer] [Azkaban] ************* loginLoggerObjName is null, make sure there is a logger with name azkaban.webapp.servlet.LoginAbstractAzkabanServlet
+2021/07/30 15:15:37.261 +0800 INFO [ExecutorManager] [Azkaban] Initializing executors from database.
+2021/07/30 15:15:37.277 +0800 INFO [ExecutorManager] [Azkaban] Loading running flows from database..
+2021/07/30 15:15:37.304 +0800 INFO [ExecutorManager] [Azkaban] Loaded 0 running flows
+2021/07/30 15:15:37.308 +0800 INFO [ExecutorManager] [Azkaban] QueueProcessorThread active turned true
+2021/07/30 15:15:37.322 +0800 INFO [ExecutionLogsCleaner] [Azkaban] Starting execution logs clean up thread
+2021/07/30 15:15:37.334 +0800 INFO [ExecutionLogsCleaner] [Azkaban] Cleaning old logs from execution_logs
+2021/07/30 15:15:37.351 +0800 INFO [AzkabanWebServer] [Azkaban] Setting up web resource dir web/
+2021/07/30 15:15:37.524 +0800 INFO [ExecutionLogsCleaner] [Azkaban] Cleaning old log files before 2021-05-07T15:15:37.334+08:00
+2021/07/30 15:15:37.543 +0800 INFO [ExecutionLogsCleaner] [Azkaban] Cleaned up 0 log entries.
+2021/07/30 15:15:37.543 +0800 INFO [ExecutionLogsCleaner] [Azkaban] log clean up time: 19 ms.
+2021/07/30 15:15:37.594 +0800 INFO [JdbcTriggerImpl] [Azkaban] Loading all triggers from db.
+2021/07/30 15:15:37.604 +0800 INFO [JdbcTriggerImpl] [Azkaban] Loaded 0 triggers.
+2021/07/30 15:15:37.661 +0800 INFO [ProjectManagerServlet] [Azkaban] downloadBufferSize: 8192
+2021/07/30 15:15:37.856 +0800 INFO [AzkabanWebServer] [Azkaban] Server started
+2021/07/30 15:16:01.034 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108  -  "GET / - HTTP/1.1" browser
+2021/07/30 15:16:09.154 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108  -  "POST / - HTTP/1.1" browser
+2021/07/30 15:16:11.646 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108  -  "POST / - HTTP/1.1" browser
+2021/07/30 15:16:11.837 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108  -  "POST / - HTTP/1.1" browser
+2021/07/30 15:18:38.844 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108  -  "POST / - HTTP/1.1" browser
+2021/07/30 15:19:15.454 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108  -  "POST / - HTTP/1.1" browser
+2021/07/30 15:19:15.459 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] Session id created for user 'suyongjie' and ip 123.120.106.108, 0 session(s) found from this IP
+2021/07/30 15:19:15.519 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108 suyongjie "GET / - HTTP/1.1" browser
+2021/07/30 15:19:15.534 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108 suyongjie "GET /index - HTTP/1.1" browser
+2021/07/30 15:19:18.286 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108 suyongjie "GET /schedule - HTTP/1.1" browser
+2021/07/30 15:21:31.348 +0800 INFO [LoginAbstractAzkabanServlet] [Azkaban] 123.120.106.108 suyongjie "GET /index - HTTP/1.1" browser

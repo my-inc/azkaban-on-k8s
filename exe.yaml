@@ -19,7 +19,7 @@ spec:
       terminationGracePeriodSeconds: 20
       containers:
         - name: azkaban
-          image: localhost:32000/azkaban:t3
+          image: registry.cn-zhangjiakou.aliyuncs.com/myt-images/azkaban-python3:v3.84.4
           #imagePullPolicy: Always
           #command: ['bash','-c','sleep 1h']
           args: ["exe"]
@@ -37,40 +37,47 @@ spec:
                   #- mysql -u${MYSQL_USER_NAME} -p${MYSQL_USER_PASSWORD} -h${MYSQL_HOST} ${MYSQL_DB} -e "SELECT * FROM executors" 
                   - /bin/bash
                   - -c 
-                  - mysql -u${MYSQL_USER_NAME} -p${MYSQL_USER_PASSWORD} -h${MYSQL_HOST} ${MYSQL_DB} -e "UPDATE executors SET active=0 WHERE host='`hostname -A`'"
+                  - mysql -usuyongjie -pMykj@123456 -hrm-8vb0y96rf7m3fai4m.mysql.zhangbei.rds.aliyuncs.com azkaban -e "UPDATE executors SET active=0 WHERE host='`hostname -A`'"
           env:
             - name: MYSQL_HOST
-              value: azkaban-mysql
+              value: rm-8vb0y96rf7m3fai4m.mysql.zhangbei.rds.aliyuncs.com
             - name: MYSQL_DB
               value: azkaban
             - name: MYSQL_USER_NAME
-              value: azkaban
+              value: suyongjie
             - name: MYSQL_USER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-pass
-                  key: user-password
+              value: Mykj@123456
           volumeMounts:
             - name: config
-              mountPath: /opt/azkaban/conf/
+              mountPath: /opt/azkaban/azkaban-web/conf/azkaban.properties
+              subPath: azkaban.properties
+            - name: tz
+              mountPath: /etc/localtime
+              subPath: Shanghai
       volumes:
         - name: config
           configMap:
             name: azkaban-exe-config
             items:
               - key: azkaban-exe.properties
-                path: azkaban-exe.properties
+                path: azkaban.properties
+        - name: tz
+          configMap:
+            name: tz
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "intranet"
   name: azkaban-exe
   namespace: azkaban
 spec:
   selector:
     app: azkaban
     deploy: exe
-  clusterIP: None
+  type: LoadBalancer
   ports:
     - port: 12321
+      protocol: TCP
       targetPort: 12321

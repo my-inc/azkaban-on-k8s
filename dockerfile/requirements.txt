@@ -1,0 +1,14 @@
+redis
+ipip-ipdb
+msgpack
+ua_parser
+qqwry-py3
+lmdb
+oss2
+pyodps
+kafka-python==2.0.2
+PyMySQL==1.0.2
+Image==1.5.33
+numpy
+matplotlib
+requests
